@@ -1,0 +1,13 @@
+common: &common
+  adapter: postgresql
+  username: 
+  password: codigo # from psql setup, see Postgresql  
+  host: localhost
+
+development:
+  <<: *common
+  database: urlshare_development
+
+production:
+  <<: *common
+  database: urlshare_production

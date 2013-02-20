@@ -1,0 +1,11 @@
+- if flash[:notice]
+  %p.notice= flash[:notice]
+- if flash[:error]
+  %p.error= flash[:error]
+
+- if user_signed_in?
+  Hello
+  = current_user.name
+  = button_to 'Sign out', destroy_user_session_path, method: :delete
+- else
+  = link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook)
