@@ -8,5 +8,7 @@ class AuthenticationsController < ApplicationController
     @oauth_access_token = @fb_request["oauth_token"]
     @graph = Koala::Facebook::API.new(@oauth_access_token)
     @profile = @graph.get_object("me")
+    @user = User.find_for_facebook_koala(@profile)
+    sign_in(@user)
   end
 end

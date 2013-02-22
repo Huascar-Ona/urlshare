@@ -21,4 +21,17 @@ class User < ActiveRecord::Base
     end
     user
   end
+
+  def self.find_for_facebook_koala(user_info)
+    user = User.where(:provider => 'facebook', :uid => user_info["id"]).first
+    unless user
+      user = User.create(name:user_info["name"],
+                            provider:'facebook',
+                            uid:user_info["id"],
+                            email:user_info["email"],
+                            password:Devise.friendly_token[0,20]
+                            )
+    end
+    user
+  end
 end
